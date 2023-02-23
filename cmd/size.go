@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"errors"
 	"fmt"
 	"os"
 
@@ -19,11 +18,9 @@ var sizeCmd = &cobra.Command{
 
 		fInfo, err := os.Stat(args[0])
 
-		if errors.Is(err, os.ErrNotExist) {
-
-			fmt.Println("file does not exist")
+		if err != nil {
+			fmt.Println(err)
 		} else {
-
 			fsize := fInfo.Size()
 			fmt.Printf("The file size is %d bytes\n", fsize)
 		}
